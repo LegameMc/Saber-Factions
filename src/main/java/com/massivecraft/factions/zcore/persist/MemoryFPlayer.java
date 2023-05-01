@@ -1,7 +1,5 @@
 package com.massivecraft.factions.zcore.persist;
 
-import cc.javajobs.wgbridge.WorldGuardBridge;
-import cc.javajobs.wgbridge.infrastructure.struct.WGRegionSet;
 import com.massivecraft.factions.*;
 import com.massivecraft.factions.cmd.audit.FLogType;
 import com.massivecraft.factions.event.*;
@@ -22,6 +20,9 @@ import com.massivecraft.factions.zcore.fperms.PermissableAction;
 import com.massivecraft.factions.zcore.util.FastUUID;
 import com.massivecraft.factions.zcore.util.TL;
 import com.massivecraft.factions.zcore.util.TextUtil;
+import com.sk89q.worldguard.bukkit.RegionContainer;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import net.kyori.adventure.text.Component;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
@@ -860,12 +861,10 @@ public abstract class MemoryFPlayer implements FPlayer {
     }
 
     public boolean hasRegionsInChunk(Chunk chunk) {
-        WorldGuardBridge worldGuardBridge = WorldGuardBridge.getInstance();
-        if (worldGuardBridge == null || worldGuardBridge.getAPI() == null) {
-            return false;
-        }
-        WGRegionSet regions = worldGuardBridge.getAPI().getRegions(new Location(chunk.getWorld(), chunk.getX() << 4, 0, chunk.getZ() << 4));
-        return regions != null;
+        RegionContainer container = WorldGuardPlugin.inst().getRegionContainer();
+        ApplicableRegionSet set = container.createQuery().getApplicableRegions(new Location(chunk.getWorld(), chunk.getX() << 4, 0, chunk.getZ() << 4));
+
+        return set.size() != 0;
     }
 
     public boolean canClaimForFactionAtLocation(Faction forFaction, FLocation flocation, boolean notifyFailure) {

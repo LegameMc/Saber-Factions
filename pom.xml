@@ -102,12 +102,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>cc.javajobs.wgbridge</groupId>
-            <artifactId>WorldGuardBridge</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>xyz.xenondevs</groupId>
             <artifactId>particle</artifactId>
             <version>1.8.4</version>
@@ -194,20 +188,6 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>mcMMO</groupId>
-            <artifactId>mcMMO</artifactId>
-            <scope>system</scope>
-            <version>2.0</version>
-            <systemPath>${project.basedir}/dependencies/mcMMO.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>Lunar-Client-API</groupId>
-            <artifactId>LC-API</artifactId>
-            <scope>system</scope>
-            <version>1.16</version>
-            <systemPath>${project.basedir}/dependencies/bukkitapi.jar</systemPath>
-        </dependency>
         <dependency>
             <groupId>be.maximvdw</groupId>
             <artifactId>MVdWPlaceholderAPI</artifactId>
@@ -440,18 +420,18 @@
             <version>1.5.21</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.gmail.legamemc</groupId>
+            <artifactId>YvernalKingdom</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.bstats</groupId>
             <artifactId>bstats-bukkit</artifactId>
             <version>3.0.0</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>findbugs-maven-plugin</artifactId>
-            <version>3.0.5</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -468,11 +448,6 @@
             <id>codemc-repo</id>
             <url>https://repo.codemc.org/repository/maven-public/</url>
             <layout>default</layout>
-        </repository>
-        <repository>
-            <id>central</id>
-            <name>bintray</name>
-            <url>https://jcenter.bintray.com</url>
         </repository>
         <repository>
             <id>mojang-repo</id>

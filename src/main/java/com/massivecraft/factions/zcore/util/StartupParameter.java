@@ -1,7 +1,6 @@
 package com.massivecraft.factions.zcore.util;
 
 import com.cryptomorin.xseries.XMaterial;
-import com.lunarclient.bukkitapi.LunarClientAPI;
 import com.massivecraft.factions.*;
 import com.massivecraft.factions.cmd.Aliases;
 import com.massivecraft.factions.cmd.audit.FLogManager;
@@ -12,13 +11,11 @@ import com.massivecraft.factions.cmd.reserve.ReserveObject;
 import com.massivecraft.factions.data.helpers.FactionDataHelper;
 import com.massivecraft.factions.integration.Econ;
 import com.massivecraft.factions.integration.Essentials;
-import com.massivecraft.factions.integration.LunarClientWrapper;
 import com.massivecraft.factions.integration.dynmap.EngineDynmap;
 import com.massivecraft.factions.util.Logger;
 import com.massivecraft.factions.util.Metrics;
 import com.massivecraft.factions.util.timer.TimerManager;
 import com.massivecraft.factions.zcore.file.impl.FileManager;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.Plugin;
 import org.saberdev.corex.CoreX;
@@ -66,11 +63,6 @@ public class StartupParameter {
 
             Aliases.load();
             EngineDynmap.getInstance().init();
-
-            if(Bukkit.getPluginManager().isPluginEnabled("LunarClient-API")) {
-                FactionsPlugin.getInstance().lcWrapper = new LunarClientWrapper(LunarClientAPI.getInstance());
-                Logger.print("Implementing Lunar Client Integration", Logger.PrefixType.DEFAULT);
-            }
 
             FactionsPlugin.getInstance().hookedPlayervaults = setupPlayerVaults();
 

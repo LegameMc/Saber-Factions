@@ -163,7 +163,7 @@ public class FCmdRoot extends FCommand implements CommandExecutor {
     public CmdSetTnt cmdSetTnt = new CmdSetTnt();
     public CmdCornerList cmdCornerList = new CmdCornerList();
     public CmdAutoUnclaim cmdAutoUnclaim = new CmdAutoUnclaim();
-    public CmdRally cmdRally = new CmdRally();
+    //public CmdRally cmdRally = new CmdRally();
     public CmdSetRelation cmdSetRelation = new CmdSetRelation();
     public CmdInvite cmdInvite = new CmdInvite();
     public CmdJoin cmdJoin = new CmdJoin();
@@ -310,7 +310,7 @@ public class FCmdRoot extends FCommand implements CommandExecutor {
         this.addSubCommand(this.cmdSetTnt);
         this.addSubCommand(this.cmdUnclaimfill);
         this.addSubCommand(this.cmdAutoUnclaim);
-        this.addSubCommand(this.cmdRally);
+        //this.addSubCommand(this.cmdRally);
         this.addSubCommand(this.cmdSetRelation);
         this.addSubCommand(this.cmdSetDiscord);
         this.addSubCommand(this.cmdSeeDiscord);

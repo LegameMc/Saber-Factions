@@ -1,6 +1,5 @@
 package com.massivecraft.factions;
 
-import cc.javajobs.wgbridge.WorldGuardBridge;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -17,7 +16,6 @@ import com.massivecraft.factions.cmd.banner.struct.BannerManager;
 import com.massivecraft.factions.cmd.chest.AntiChestListener;
 import com.massivecraft.factions.cmd.reserve.ReserveAdapter;
 import com.massivecraft.factions.cmd.reserve.ReserveObject;
-import com.massivecraft.factions.integration.LunarClientWrapper;
 import com.massivecraft.factions.listeners.*;
 import com.massivecraft.factions.listeners.vspecific.ChorusFruitListener;
 import com.massivecraft.factions.missions.MissionHandler;
@@ -57,7 +55,6 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.lang.reflect.Modifier;
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 public class FactionsPlugin extends MPlugin {
@@ -102,7 +99,6 @@ public class FactionsPlugin extends MPlugin {
     private ClipPlaceholderAPIManager clipPlaceholderAPIManager;
     private boolean mvdwPlaceholderAPIManager = false;
     private BannerManager bannerManager;
-    public LunarClientWrapper lcWrapper;
 
     public FactionsPlugin() {
         instance = this;
@@ -163,13 +159,6 @@ public class FactionsPlugin extends MPlugin {
             this.cmdAutoHelp = new CmdAutoHelp();
 
             setupPermissions();
-
-            if (Conf.worldGuardChecking || Conf.worldGuardBuildPriority) {
-                Plugin plugin = Bukkit.getPluginManager().getPlugin("WorldGuard");
-                if (plugin != null) {
-                    new WorldGuardBridge().connect(this, true);
-                }
-            }
 
             // start up task which runs the autoLeaveAfterDaysOfInactivity routine
             startAutoLeaveTask(false);
@@ -407,10 +396,6 @@ public class FactionsPlugin extends MPlugin {
 
     public void logFactionEvent(Faction faction, FLogType type, String... arguments) {
         this.fLogManager.log(faction, type, arguments);
-    }
-
-    public LunarClientWrapper getLunarClientWrapper() {
-        return lcWrapper;
     }
 
     public List<ReserveObject> getFactionReserves() {

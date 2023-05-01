@@ -1,6 +1,8 @@
 package com.massivecraft.factions.listeners;
 
 import com.cryptomorin.xseries.XMaterial;
+import com.gmail.legamemc.yvernalkingdom.YvernalKingdom;
+import com.gmail.legamemc.yvernalkingdom.data.Kingdom;
 import com.massivecraft.factions.*;
 import com.massivecraft.factions.cmd.CmdFGlobal;
 import com.massivecraft.factions.cmd.CmdSeeChunk;
@@ -9,6 +11,7 @@ import com.massivecraft.factions.cmd.logout.LogoutHandler;
 import com.massivecraft.factions.event.FPlayerEnteredFactionEvent;
 import com.massivecraft.factions.event.FPlayerJoinEvent;
 import com.massivecraft.factions.event.FPlayerLeaveEvent;
+import com.massivecraft.factions.integration.Kingdoms;
 import com.massivecraft.factions.scoreboards.FScoreboard;
 import com.massivecraft.factions.scoreboards.FTeamWrapper;
 import com.massivecraft.factions.scoreboards.sidebar.FDefaultSidebar;
@@ -103,6 +106,13 @@ public class FactionsPlayerListener implements Listener {
 
         FLocation loc = FLocation.wrap(location);
         Faction otherFaction = Board.getInstance().getFactionAt(loc);
+
+        if(!otherFaction.isWilderness()){
+            if(Kingdoms.canPlayerBuildAndUse(location, otherFaction)){
+                return true;
+            }
+        }
+
         Faction myFaction = me.getFaction();
 
         // Also cancel if player doesn't have ownership rights for this claim
@@ -180,9 +190,19 @@ public class FactionsPlayerListener implements Listener {
         FPlayer me = FPlayers.getInstance().getByPlayer(player);
         if (me.isAdminBypassing())
             return true;
+
         // Dupe fix.
         FLocation loc = FLocation.wrap(block);
         Faction otherFaction = Board.getInstance().getFactionAt(loc);
+
+        if(!otherFaction.isWilderness()){
+            if(!otherFaction.isWilderness()){
+                if(Kingdoms.canPlayerBuildAndUse(block.getLocation(), otherFaction)){
+                    return true;
+                }
+            }
+        }
+
         Faction myFaction = me.getFaction();
 
         // no door/chest/whatever protection in wilderness, war zones, or safe zones
